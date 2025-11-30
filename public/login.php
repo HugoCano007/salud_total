@@ -24,12 +24,10 @@ if ($_SERVER['REQUEST METHOD'] === 'POST') {
             $_SESSION['user_role'] = $user['rol'];
             header('Location: panel.php');
             exit;
-        }
-        else[
+        } else{
             $msg = 'Credenciales Incorrectas.';
-        ]
+        }
     }
-
 }
 ?>
 
