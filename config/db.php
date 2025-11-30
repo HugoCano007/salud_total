@@ -4,7 +4,7 @@ declare(strict_types=1);
 $DB_HOST = 'localhost';
 $DB_NAME = 'salud_total';
 $DB_USER = 'root';
-$DB_PASS = ''; // Ajusta según tu entorno
+$DB_PASS = '';
 
 try {
     $pdo = new PDO(
