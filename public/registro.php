@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . './config/db.php';
-require_once __DIR__ . './config/session.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/session.php';
 require_auth();
 
 $msg = '';
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $precio = (float)($_POST['precio'] ?? 0);
         $proveedor_id = ($_POST['proveedor_id'] ?? '') !== '' ? (int)$_POST['proveedor_id'] : null;
 
-        if ($nombre ==='' || $categoria === '' || $cantidad === < 0 || $precio < 0) {
+        if ($nombre === '' || $categoria === '' || $cantidad < 0 || $precio < 0) {
             $msg = 'Datos no válidos, Verifica el formulario.';
         }
         else {

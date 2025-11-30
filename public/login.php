@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . './config/db.php';
-require_once __DIR__ . './config/session.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/session.php';
 
-if ($_SERVER['REQUEST METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $clave = $_POST['clave'] ?? '';
     $csrf = $_POST['csrf'] ?? '';
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST METHOD'] === 'POST') {
     else {
         $stmt = $pdo->prepare('SELECT id, nombre, email, clave, rol FROM usuarios
         WHERE email = ? LIMIT 1');
-        $stmt->execute{[$email]};
+        $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($clave, $user['clave'])) {
@@ -53,6 +53,10 @@ if ($_SERVER['REQUEST METHOD'] === 'POST') {
     <?php endif; ?>
     <form method="post" data-validate="true">
       <input type="hidden" name="csrf" value="<?= csrf_token(); ?>">
+      <div class="input-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="nombre" data-required="true" required>
+      </div>
       <div class="input-group">
         <label for="email">Correo electrónico</label>
         <input id="email" name="email" type="email" data-required="true" required>

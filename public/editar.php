@@ -1,6 +1,6 @@
 <?php 
-require_once __DIR__. './config/db.php';
-require_once __DIR__. './config/session.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/session.php';
 require_auth();
 
 $id = (int)($_GET['id'] ?? 0);
@@ -20,14 +20,14 @@ if ($_SERVER['REQUEST METHOD'] === 'POST') {
         $categoria = trim($_POST['categoria' ?? '']);
         $cantidad = int($_POST['cantidad' ?? 0]);
         $precio = float($_POST['precio'] ?? 0);
-        $proveedor_id = ($_POST['proveedor_id'] ?? '' !== '' ? (int)$_POST['proveedor_id'] : null;
+        $proveedor_id = ($_POST['proveedor_id'] ?? '' !== '' ? (int)$_POST['proveedor_id'] : null);
 
-        if ($nombre === '') || $categoria === '' || $cantidad < 0 || $precio < 0 {
+        if ($nombre === '' || $categoria === '' || $cantidad < 0 || $precio < 0) {
             $msg = 'Datos no válidos, Verifca el formulario.';
         }
         else {
             $stmt = $pdo->prepare('UPDATE medicamentos SET nombre=?, categoria=?, cantidad=?, precio=?,
-            proveedor_id=? WHERE id=?')
+            proveedor_id=? WHERE id=?');
             $stmt->execute([$nombre, $categoria, $cantidad, $precio, $proveedor_id, $id]);
             header('Location: panel.php?status=Modificacion exitosa');
             exit;

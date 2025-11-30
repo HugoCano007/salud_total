@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__. './config/db.php';
-require_once __DIR__. './config/session.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../config/session.php';
 require_auth();
 
 $id = (int)($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location : panel.php?status=ID inválido');
+    header('Location: panel.php?status=ID inválido');
     exit;
 }
 
@@ -14,14 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf = $_POST['csrf'] ?? '';
     if (!csrf_validate($csrf)) {
         $msg = 'Solicitud no válida (CSRF).';
-    }
-    else {
-        if (isset($_POST['confirm']) && $_POST['confirm'] === 'sí' {
+    } else {
+        if (isset($_POST['confirm']) && $_POST['confirm'] === 'sí') {
             $stmt = $pdo->prepare('DELETE FROM medicamentos WHERE id = ?');
             $stmt->execute([$id]);
-            header('Location: panel.php?status=Eliminación cancelada');
+            header('Location: panel.php?status=Eliminación exitosa');
             exit;
-        })
+        }
     }
 }
 
@@ -29,7 +28,7 @@ $stmt = $pdo->prepare('SELECT nombre FROM medicamentos WHERE id = ?');
 $stmt->execute([$id]);
 $med = $stmt->fetch();
 if (!$med) {
-    header('Location: panel.php?status=Medicamento no encontardo');
+    header('Location: panel.php?status=Medicamento no encontrado');
     exit;
 }
 ?>
