@@ -27,6 +27,7 @@ $categorias = $catsStmt->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario | Salud Total</title>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <div class="container">
